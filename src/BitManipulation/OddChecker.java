@@ -2,15 +2,10 @@ package BitManipulation;
 
 public class OddChecker {
   public static boolean isOdd(int n){
-    if (n%2==0) {
-      return false;
-    }
-    else {
-      return true;
-    }
+    return (n&1)==1;
   }
 
   public static void main(String[] args) {
-    System.out.println(isOdd(1));
+    System.out.println(isOdd(24));
   }
 }
