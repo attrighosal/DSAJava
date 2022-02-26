@@ -1,39 +1,51 @@
 package Trees;
 
 public class BinaryTree {
-  public Node root;
+  public TreeNode root;
 
-  private Node recursive_create(int[] array, int index) {
-    if(index >= array.length) {
+  private TreeNode recursive_create(int[] array, int index) {
+    if (index>= array.length) {
       return null;
     }
-    Node node = new Node(array[index]);
+    TreeNode node = new TreeNode(array[index]); // Create a node
     node.left = recursive_create(array, 2*index+1);
     node.right = recursive_create(array, 2*index+2);
     return node;
   }
 
-  public Node createTree(int[] array) {
-    if (array.length==0) {
-      return null;
-    }
+  public TreeNode createTree(int[] array) {
     root = recursive_create(array, 0);
     return root;
   }
 
-  public void inOrderTraversal(Node node) {
-    if(node==null) {
+  public void inOrderTraversal(TreeNode node) {
+    if (node==null) {
       return;
     }
     inOrderTraversal(node.left);
-    System.out.print(node.value+" ");
+    System.out.print(node.val+" ");
     inOrderTraversal(node.right);
   }
 
+  private int recursiveSum(TreeNode node) {
+    if (node == null) {
+      return 0;
+    }
+    int left = recursiveSum(node.left);
+    int right = recursiveSum(node.right);
+    return left + right + node.val;
+  }
+
+  public int sum() {
+    return recursiveSum(root);
+  }
+
   public static void main(String[] args) {
-    int[] array = {5,8,3,9,10};
+    int[] array = {28,10,54,38,43,3,5};
     BinaryTree bt = new BinaryTree();
     bt.createTree(array);
     bt.inOrderTraversal(bt.root);
+//    int sum = bt.sum();
+//    System.out.println("Sum : "+sum);
   }
 }
